@@ -1,23 +1,37 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'application'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
 
-mainClassName = 'hello.HelloWorld'
+jar {
+    baseName = 'gs-spring-boot'
+    version =  '0.1.0'
+}
 
 repositories {
     mavenCentral()
-}
-
-jar {
-    baseName = 'gs-gradle'
-    version =  '0.1.0'
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile "joda-time:joda-time:2.2"
+    compile("org.springframework.boot:spring-boot-starter-web")
+    // tag::actuator[]
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    // end::actuator[]
+    // tag::tests[]
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    // end::tests[]
 }
 
 task wrapper(type: Wrapper) {
